@@ -9,6 +9,8 @@ var http = require('http'),
     errorhandler = require('errorhandler'),
     mongoose = require('mongoose');
 
+var Sockets = require('./sockets');
+
 var isProduction = process.env.NODE_ENV === 'production';
 
 // Create global app object
@@ -88,3 +90,15 @@ app.use((err, req, res, next) => {
 var server = app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on port ' + server.address().port);
 });
+
+
+// var io = require("socket.io").listen(server);
+
+// io.on('connection', function (socket) {
+//     socket.emit('news', { hello: 'world' });
+//     socket.on('my other event', function (data) {
+//         console.log(data);
+//     });
+// });
+
+Sockets.connect(server);
