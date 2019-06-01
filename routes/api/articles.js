@@ -6,7 +6,7 @@ var User = mongoose.model('User');
 var auth = require('../auth');
 
 // Preload article objects on routes with ':article'
-router.param('article', function (req, res, next, slug) {
+router.param('article', (req, res, next, slug) => {
     Article.findOne({ slug: slug })
         .populate('author')
         .then(function (article) {
@@ -18,9 +18,11 @@ router.param('article', function (req, res, next, slug) {
         }).catch(next);
 });
 
-router.param('comment', function (req, res, next, id) {
-    Comment.findById(id).then(function (comment) {
-        if (!comment) { return res.sendStatus(404); }
+router.param('comment', (req, res, next, id) => {
+    Comment.findById(id).then((comment) => {
+        if (!comment) {
+            return res.sendStatus(404);
+        }
 
         req.comment = comment;
 
