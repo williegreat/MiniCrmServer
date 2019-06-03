@@ -44,6 +44,7 @@ require('./models/User');
 require('./models/Article');
 require('./models/Comment');
 require('./models/Customer');
+require('./models/Order');
 require('./config/passport');
 
 app.use(require('./routes'));
